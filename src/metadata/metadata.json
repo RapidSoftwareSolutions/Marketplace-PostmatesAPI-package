@@ -1,0 +1,294 @@
+{ 
+    "package": "PostmatesAPI",
+    "tagline": "Postmates API Wrapper",
+    "description": "You can use the Postmates API to utilize our fleet of couriers to deliver your products within our geographic zones.",
+    "image": "http://logo.clearbit.com/postmates.com",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-PostmatesAPI-package",
+    "accounts": {
+        "domain": "postmates.com",
+        "credentials": [
+            "customerId",
+            "apiKey"
+        ]
+    },
+    "blocks": [{
+        "name":"getDeliveryQuote",
+        "description": "This allows you to make decisions about the appropriate cost and availability for using the Postmates platform, which can vary based on distance and demand.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            },
+            {
+                "name": "pickupAddress",
+                "type": "String",
+                "info": "Required: The pickup address for a potential delivery."
+            },
+            {
+                "name": "dropoffAddress",
+                "type": "String",
+                "info": "Required: The dropoff address for a potential delivery."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"getDeliveryZones",
+        "description": "This endpoint returns a list of GeoJSON-valid FeatureCollection objects representing all of our active delivery zones.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"createDelivery",
+        "description": "This endpoint create a delivery.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "quoteId",
+                "type": "String",
+                "info": "Optional: The ID of a previously generated delivery quote. Optional, but recommended."
+            }, {
+                "name": "manifest",
+                "type": "String",
+                "info": "Required: A detailed description of what the courier will be delivering. Example: \"A box of gray kittens\"."
+            }, {
+                "name": "manifestReference",
+                "type": "String",
+                "info": "Optional: Optional reference that identifies the manifest. Example: \"Order #690\"."
+            }, {
+                "name": "pickupName",
+                "type": "String",
+                "info": "Required: Name of the place where the courier will make the pickup. Example: \"Kitten Warehouse\"."
+            }, {
+                "name": "pickupAddress",
+                "type": "String",
+                "info": "Required: The pickup address for the delivery. Example: \"20 McAllister St, San Francisco, CA\"."
+            }, {
+                "name": "pickupPhoneNumber",
+                "type": "String",
+                "info": "Required: The phone number of the pickup location. Example: \"415-555-4242\"."
+            }, {
+                "name": "pickupBusinessName",
+                "type": "String",
+                "info": "Optional: Optional business name of the pickup location. Example: \"Feline Enterprises, Inc.\"."
+            }, {
+                "name": "pickupNotes",
+                "type": "String",
+                "info": "Optional: Additional instructions for the courier at the pickup location. Example: \"Ring the doorbell twice, and only delivery the package if a human answers.\"."
+            }, {
+                "name": "dropoffName",
+                "type": "String",
+                "info": "Required: Name of the place where the courier will make the dropoff. Example: \"Alice\"."
+            }, {
+                "name": "dropoffAddress",
+                "type": "String",
+                "info": "Required: The dropoff address for the delivery. Example: \"678 Green St, San Francisco, CA\"."
+            }, {
+                "name": "dropoffPhoneNumber",
+                "type": "String",
+                "info": "Required: The phone number of the dropoff location. Example: \"415-555-8484\"."
+            }, {
+                "name": "dropoffBusinessName",
+                "type": "String",
+                "info": "Optional: Optional business name of the dropoff location. Example: \"Alice's Cat Cafe\"."
+            }, {
+                "name": "dropoffNotes",
+                "type": "String",
+                "info": "Optional: Additional instructions for the courier at the dropoff location. Example: \"Tell the security guard that you're here to see Alice.\"."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"getAllDeliveries",
+        "description": "List all deliveries for a customer.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "filter",
+                "type": "String",
+                "info": "Optional: This filter limits the results to only deliveries that are currently being delivered. Possible value \"ongoing\"."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"getDelivery",
+        "description": "Retrieve updated details about a delivery.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "deliveryId",
+                "type": "String",
+                "info": "Required: The ID of the created delivery."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"cancelDelivery",
+        "description": "Cancel an ongoing delivery. A delivery can only be canceled prior to a courier completing pickup. Delivery fees still apply.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "deliveryId",
+                "type": "String",
+                "info": "Required: The ID of the created delivery."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"returnDelivery",
+        "description": "Cancel an ongoing delivery that was already picked up and create a delivery that is a reverse of the original. The items will get returned to the original pickup location.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "deliveryId",
+                "type": "String",
+                "info": "Required: The ID of the created delivery."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }, {
+        "name":"addCourierTip",
+        "description": "After an order has completed, you can add a tip for the courier for up to 7 days.",
+        "args":[
+            {
+                "name": "customerId",
+                "type": "credentials",
+                "info": "Required: The customer id obtained from Postmates."
+            }, {
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Required: The API Key obtained from Postmates."
+            }, {
+                "name": "deliveryId",
+                "type": "String",
+                "info": "Required: The ID of the created delivery."
+            }, {
+                "name": "tipByCustomer",
+                "type": "String",
+                "info": "Required: Amount in cents that will be paid to the courier as a tip."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }
+    ]
+}
