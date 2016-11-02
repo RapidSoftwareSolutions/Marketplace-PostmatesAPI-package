@@ -257,38 +257,6 @@
                 "info": "Success => channels: Array <string>"
             }
         ]
-    }, {
-        "name":"addCourierTip",
-        "description": "After an order has completed, you can add a tip for the courier for up to 7 days.",
-        "args":[
-            {
-                "name": "customerId",
-                "type": "credentials",
-                "info": "Required: The customer id obtained from Postmates."
-            }, {
-                "name": "apiKey",
-                "type": "credentials",
-                "info": "Required: The API Key obtained from Postmates."
-            }, {
-                "name": "deliveryId",
-                "type": "String",
-                "info": "Required: The ID of the created delivery."
-            }, {
-                "name": "tipByCustomer",
-                "type": "String",
-                "info": "Required: Amount in cents that will be paid to the courier as a tip."
-            }
-        ],
-        "callbacks":[
-            {
-                "name":"error",
-                "info": "Error"
-            },
-            {
-                "name":"success",
-                "info": "Success => channels: Array <string>"
-            }
-        ]
     }
     ]
 }
