@@ -18,7 +18,6 @@ You can use the Postmates API to utilize our fleet of couriers to deliver your p
 * [getDelivery](#getDelivery)
 * [cancelDelivery](#cancelDelivery)
 * [returnDelivery](#returnDelivery)
-* [addCourierTip](#addCourierTip)
  
 <a name="getDeliveryQuote"/>
 ## PostmatesAPI.getDeliveryQuote
@@ -102,14 +101,4 @@ Cancel an ongoing delivery that was already picked up and create a delivery that
 | apiKey    | credentials| Required: The API Key obtained from Postmates.
 | deliveryId| String     | Required: The ID of the created delivery.
 
-<a name="addCourierTip"/>
-## PostmatesAPI.addCourierTip
-After an order has completed, you can add a tip for the courier for up to 7 days.
-
-| Field        | Type       | Description
-|--------------|------------|----------
-| customerId   | credentials| Required: The customer id obtained from Postmates.
-| apiKey       | credentials| Required: The API Key obtained from Postmates.
-| deliveryId   | String     | Required: The ID of the created delivery.
-| tipByCustomer| String     | Required: Amount in cents that will be paid to the courier as a tip.
 
