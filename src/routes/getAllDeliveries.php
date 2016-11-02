@@ -51,7 +51,7 @@ $app->post('/api/PostmatesAPI/getAllDeliveries', function ($request, $response, 
         
         if(isset($rawBody->next_href)) {
             $pagin = $this->pager;
-            $ret = $pagin->page(substr($settings['api_url'],0,-1).$rawBody->next_href, $auth);
+            $ret = $pagin->page(substr($settings['api_url'],0,-1).$rawBody->next_href, $auth, $query);
          
             $merge = array_merge($all_data[0]->data, $ret);
         
