@@ -3,30 +3,24 @@ namespace Models;
 
 Class NextPage {
     protected $all_data = [];
+    protected $api_url = 'https://api.postmates.com';
     
-    public function page($url, $headers='', $query='', $next) {
+    public function page($url, $auth) {
         
         if($url) {
-            $params = explode('?',$url);
-            $args = explode('&',$params[1]);
-            foreach($args as $item) {
-               $item = explode('=', $item);
-               $query[$item[0]] = $item[1];
-            }
-            
             $client = new \GuzzleHttp\Client();
 
-            $resp = $client->get( $params[0], 
-                [
-                    'headers' => $headers,
-                    'query' => $query
-                ]);
+            $resp = $client->get( $url, 
+            [
+                'auth' => $auth,
+                'verify' => false
+            ]);
 
             $rawBody = json_decode($resp->getBody());
-            $this->all_data[] = $rawBody;
+            $this->all_data = array_merge($this->all_data, $rawBody->data);
 
-            if(!empty($rawBody->$next->next)) {
-                $this->page($rawBody->$next->next, $headers, $query, $next);
+            if(!empty($rawBody->next_href)) {
+                $this->page($this->api_url.$rawBody->next_href, $auth);
             }
         }
         return $this->all_data;
