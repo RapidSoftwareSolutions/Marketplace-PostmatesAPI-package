@@ -3,10 +3,11 @@ namespace Models;
 
 Class NextPage {
     protected $all_data = [];
+    protected $page = 1;
     protected $api_url = 'https://api.postmates.com';
     
     public function page($url, $auth, $old_query) {
-        
+      
         if($url) {
             $client = new \GuzzleHttp\Client();
             
@@ -28,12 +29,21 @@ Class NextPage {
             ]);
 
             $rawBody = json_decode($resp->getBody());
-            $this->all_data = array_merge($this->all_data, $rawBody->data);
-
-            if(!empty($rawBody->next_href)) {
-                $this->page($this->api_url.$rawBody->next_href, $auth, $old_query);
+            if(!empty($rawBody->data)) {
+                $this->all_data = array_merge($this->all_data, $rawBody->data);
+                $this->page++;
+                
+                if($this->page <= round($rawBody->total_count/32)) {
+                    if(!empty($rawBody->next_href)) {
+                        $this->page($this->api_url.$rawBody->next_href, $auth, $old_query);
+                    } else {
+                        $old_query['offset'] = $old_query['offset'] + 32;
+                        $this->page($this->api_url.$req_url['path'], $auth, $old_query);
+                    }
+                }
             }
         }
+        
         return $this->all_data;
     }    
     

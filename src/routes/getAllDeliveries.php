@@ -53,14 +53,12 @@ $app->post('/api/PostmatesAPI/getAllDeliveries', function ($request, $response, 
             $pagin = $this->pager;
             $ret = $pagin->page(substr($settings['api_url'],0,-1).$rawBody->next_href, $auth, $body);
          
-            $merge = array_merge($all_data[0]->data, $ret);
-        
-            $all_data[0]->data = $merge;
+            $all_data[0]->data = array_merge($all_data[0]->data, $ret);         
         }
         
         if($resp->getStatusCode() == '200') {
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to'] = is_array($all_data) ? $all_data : json_decode($all_data);
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
