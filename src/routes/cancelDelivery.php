@@ -12,18 +12,20 @@ $app->post('/api/PostmatesAPI/cancelDelivery', function ($request, $response, $a
     
     $error = [];
     if(empty($post_data['args']['customerId'])) {
-        $error[] = 'customerId cannot be empty';
+        $error[] = 'customerId';
     }
     if(empty($post_data['args']['apiKey'])) {
-        $error[] = 'apiKey cannot be empty';
+        $error[] = 'apiKey';
     }
     if(empty($post_data['args']['deliveryId'])) {
-        $error[] = 'deliveryId cannot be empty';
+        $error[] = 'deliveryId';
     }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = implode(',', $error);
+        $result['contextWrites']['to']['status_code'] = "REQUIRED_FIELDS";
+        $result['contextWrites']['to']['status_msg'] = "Please, check and fill in required fields.";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
     
@@ -48,26 +50,40 @@ $app->post('/api/PostmatesAPI/cancelDelivery', function ($request, $response, $a
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         } else {
             $result['callback'] = 'error';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+            $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         }
 
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
-        $responseBody = $exception->getResponse()->getBody();
+        $responseBody = $exception->getResponse()->getBody()->getContents();
+        if(empty(json_decode($responseBody))) {
+            $out = $responseBody;
+        } else {
+            $out = json_decode($responseBody);
+        }
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_decode($responseBody);
+        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+        $result['contextWrites']['to']['status_msg'] = $out;
 
     } catch (GuzzleHttp\Exception\ServerException $exception) {
 
+        $responseBody = $exception->getResponse()->getBody()->getContents();
+        if(empty(json_decode($responseBody))) {
+            $out = $responseBody;
+        } else {
+            $out = json_decode($responseBody);
+        }
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+        $result['contextWrites']['to']['status_msg'] = $out;
+
+    } catch (GuzzleHttp\Exception\ConnectException $exception) {
+
         $responseBody = $exception->getResponse()->getBody(true);
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_decode($responseBody);
-
-    } catch (GuzzleHttp\Exception\BadResponseException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody(true);
-        $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_decode($responseBody);
+        $result['contextWrites']['to']['status_code'] = 'INTERNAL_PACKAGE_ERROR';
+        $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
 
