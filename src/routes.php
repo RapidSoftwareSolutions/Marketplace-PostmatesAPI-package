@@ -6,7 +6,6 @@ $routes = [
     'getAllDeliveries',
     'getDelivery',
     'cancelDelivery',
-    'returnDelivery',
     'addCourierTip',
     'metadata'
 ];

@@ -140,25 +140,6 @@ class PostmatesAPITest extends BaseTestCase {
         $this->assertEquals('success', json_decode($response->getBody())->callback);
     }
     
-    public function testReturnDelivery() {
-        
-        $var = '{
-                    "args": {
-                      "customerId": "'.$this->customerId.'",
-                      "apiKey": "'.$this->apiKey.'",
-                      "deliveryId": "del_L-S7jmQAR44mKV",
-                      "runscope": "1"
-                    }
-                }';
-        $post_data = json_decode($var, true);
-
-        $response = $this->runApp('POST', '/api/PostmatesAPI/returnDelivery', $post_data);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertNotEmpty($response->getBody());
-        $this->assertEquals('success', json_decode($response->getBody())->callback);
-    }
-    
     public function testAddCourierTip() {
         
         $var = '{

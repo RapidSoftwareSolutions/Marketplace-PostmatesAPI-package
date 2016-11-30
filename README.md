@@ -17,7 +17,6 @@ You can use the Postmates API to utilize our fleet of couriers to deliver your p
 * [getAllDeliveries](#getAllDeliveries)
 * [getDelivery](#getDelivery)
 * [cancelDelivery](#cancelDelivery)
-* [returnDelivery](#returnDelivery)
  
 <a name="getDeliveryQuote"/>
 ## PostmatesAPI.getDeliveryQuote
@@ -84,16 +83,6 @@ Retrieve updated details about a delivery.
 <a name="cancelDelivery"/>
 ## PostmatesAPI.cancelDelivery
 Cancel an ongoing delivery. A delivery can only be canceled prior to a courier completing pickup. Delivery fees still apply.
-
-| Field     | Type       | Description
-|-----------|------------|----------
-| customerId| credentials| Required: The customer id obtained from Postmates.
-| apiKey    | credentials| Required: The API Key obtained from Postmates.
-| deliveryId| String     | Required: The ID of the created delivery.
-
-<a name="returnDelivery"/>
-## PostmatesAPI.returnDelivery
-Cancel an ongoing delivery that was already picked up and create a delivery that is a reverse of the original. The items will get returned to the original pickup location.
 
 | Field     | Type       | Description
 |-----------|------------|----------
