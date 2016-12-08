@@ -1,5 +1,5 @@
 # PostmatesAPI Package
-You can use the Postmates API to utilize our fleet of couriers to deliver your products within our geographic zones.
+Integrate on-demand local delivery service into your app.
 * Domain: postmates.com
 * Credentials: customerId, apiKey
 
@@ -10,15 +10,6 @@ You can use the Postmates API to utilize our fleet of couriers to deliver your p
 3. At the Authentication Keys area you can find your customerId key.
 4. At the Delivery API Keys area you can find your API key.
 
-## TOC: 
-* [getDeliveryQuote](#getDeliveryQuote)
-* [getDeliveryZones](#getDeliveryZones)
-* [createDelivery](#createDelivery)
-* [getAllDeliveries](#getAllDeliveries)
-* [getDelivery](#getDelivery)
-* [cancelDelivery](#cancelDelivery)
- 
-<a name="getDeliveryQuote"/>
 ## PostmatesAPI.getDeliveryQuote
 This allows you to make decisions about the appropriate cost and availability for using the Postmates platform, which can vary based on distance and demand.
 
@@ -29,7 +20,6 @@ This allows you to make decisions about the appropriate cost and availability fo
 | pickupAddress | String     | Required: The pickup address for a potential delivery.
 | dropoffAddress| String     | Required: The dropoff address for a potential delivery.
 
-<a name="getDeliveryZones"/>
 ## PostmatesAPI.getDeliveryZones
 This endpoint returns a list of GeoJSON-valid FeatureCollection objects representing all of our active delivery zones.
 
@@ -38,7 +28,6 @@ This endpoint returns a list of GeoJSON-valid FeatureCollection objects represen
 | customerId| credentials| Required: The customer id obtained from Postmates.
 | apiKey    | credentials| Required: The API Key obtained from Postmates.
 
-<a name="createDelivery"/>
 ## PostmatesAPI.createDelivery
 This endpoint create a delivery.
 
@@ -60,7 +49,6 @@ This endpoint create a delivery.
 | dropoffBusinessName| String     | Optional: Optional business name of the dropoff location. Example: "Alice's Cat Cafe".
 | dropoffNotes       | String     | Optional: Additional instructions for the courier at the dropoff location. Example: "Tell the security guard that you're here to see Alice.".
 
-<a name="getAllDeliveries"/>
 ## PostmatesAPI.getAllDeliveries
 List all deliveries for a customer.
 
@@ -70,7 +58,6 @@ List all deliveries for a customer.
 | apiKey    | credentials| Required: The API Key obtained from Postmates.
 | filter    | String     | Optional: This filter limits the results to only deliveries that are currently being delivered. Possible value "ongoing".
 
-<a name="getDelivery"/>
 ## PostmatesAPI.getDelivery
 Retrieve updated details about a delivery.
 
@@ -80,7 +67,6 @@ Retrieve updated details about a delivery.
 | apiKey    | credentials| Required: The API Key obtained from Postmates.
 | deliveryId| String     | Required: The ID of the created delivery.
 
-<a name="cancelDelivery"/>
 ## PostmatesAPI.cancelDelivery
 Cancel an ongoing delivery. A delivery can only be canceled prior to a courier completing pickup. Delivery fees still apply.
 
