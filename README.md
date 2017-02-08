@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/PostmatesAPI/functions?utm_source=RapidAPIGitHub_PostmatesFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # PostmatesAPI Package
 Integrate on-demand local delivery service into your app.
 * Domain: postmates.com
