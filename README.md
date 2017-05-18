@@ -6,11 +6,10 @@ Integrate on-demand local delivery service into your app.
 * Credentials: customerId, apiKey
 
 ## How to get credentials: 
-0. Go to the [Postmates web site](https://postmates.com/developer) 
-1. Log in or [register your app](https://postmates.com/partner/welcome)
-2. Go to [your apps area](https://postmates.com/partner/dashboard/apps/general)
-3. At the Authentication Keys area you can find your customerId key.
-4. At the Delivery API Keys area you can find your API key.
+0. Go to the [Postmates Dev Portal](https://postmates.com/developer/app) 
+1. Log in or register your application.
+2. After registration, you should arrive at the general tab with your various API keys.
+3. Copy both your Delivery API Keys and Authentication Keys to call endpoints with RapidAPI.
 
 ## PostmatesAPI.getDeliveryQuote
 This allows you to make decisions about the appropriate cost and availability for using the Postmates platform, which can vary based on distance and demand.
