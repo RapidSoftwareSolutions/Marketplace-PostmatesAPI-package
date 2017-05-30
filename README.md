@@ -11,6 +11,16 @@ Integrate on-demand local delivery service into your app.
 2. After registration, you should arrive at the general tab with your various API keys.
 3. Copy both your Delivery API Keys and Authentication Keys to call endpoints with RapidAPI.
 
+## Custom datatypes: 
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]``` 
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+ 
+
 ## PostmatesAPI.getDeliveryQuote
 This allows you to make decisions about the appropriate cost and availability for using the Postmates platform, which can vary based on distance and demand.
 
@@ -57,7 +67,7 @@ List all deliveries for a customer.
 |-----------|------------|----------
 | customerId| credentials| Required: The customer id obtained from Postmates.
 | apiKey    | credentials| Required: The API Key obtained from Postmates.
-| filter    | String     | Optional: This filter limits the results to only deliveries that are currently being delivered. Possible value "ongoing".
+| filter    | Select     | Optional: This filter limits the results to only deliveries that are currently being delivered. Possible value "ongoing".
 
 ## PostmatesAPI.getDelivery
 Retrieve updated details about a delivery.
